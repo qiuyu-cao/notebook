@@ -55,6 +55,8 @@ $ git diff [first-branch]...[second-branch]
 $ git show [commit]
 # 将文件提交到暂存区，文件会从 untracked 状态转变为 unstage 状态
 $ git add [file]
+# 撤销 add
+$ git restore --staged .
 # 将文件快照永久记录在版本历史中，ustage 状态的文件变为 stage
 $ git commit -m "[discriptive message]"
 # 同时运行 add 和 commit 的操作，但是会忽略 untracked 的文件
@@ -99,13 +101,26 @@ ExportedFiles.xml
 !Model/Portal/PortalTemplates/*/SupportFiles/[Bb]in
 ```
 
-#### 同步更改
+#### 版本回溯
 
 ```bash
-# 在创建好本地仓库之后，跟远程仓库进行交互
-# 下载远程仓库的历史分支
-
+# 返回到某个 commit 的状态
+git reset <commit>
+# 此时 HEAD 指针会指向当前 commit-now，再次 commit 之后会以当前 commit-now 为父节点生成新的 commit-new
+# reset 动作前 commit-now 后面提交的 commit 会保处于孤儿状态，直到 Git 的垃圾回收清理掉他们
+git add .
+git commit -m "<description>"
+# 如果后悔了 reset 操作，可以通过 git reflog 来查看 reset 前的状态码或 commit
+git reset <code>
 ```
+
+`git reset` 有 3 个不同的模式：
+
+- `--soft`：指针移动的时候，暂存区，工作区都不动。重置 git commit
+- `--mixed`：默认模式。指针移动的同时，重置暂存区，但是工作区不动。重置 git commit、git add
+- `--hard`：指针移动的同时，重置暂存区和工作区。重置 git commit、git add 和工作副本的修改
+
+> https://www.itqaq.com/index/264.html
 
 ### GitHub Action
 
@@ -175,13 +190,5 @@ git pull <remote-name>
 git pull <remote-name> master:main
 # 完成 add 和 commit 后可以将本地仓库推送到远程仓库
 git push -u <remote-name> <local-branch>:<remote-branch>
-```
-
-
-
-```bash
-# 在 GitHub 上注册账户之后，创建一个仓库，并且 clone 到本地
-git clone [url]
-# 
 ```
 
