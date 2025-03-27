@@ -107,6 +107,8 @@ ExportedFiles.xml
 # 返回到某个 commit 的状态
 # 注意：这条命令只会修改 tracked files，并不会对 untracked files 造成影响
 git reset <commit>
+# 清楚 untracked files
+git clean -fd
 # 此时 HEAD 指针会指向当前 commit-now，再次 commit 之后会以当前 commit-now 为父节点生成新的 commit-new
 # reset 动作前 commit-now 后面提交的 commit 会保处于孤儿状态，直到 Git 的垃圾回收清理掉他们
 git add .
