@@ -4,7 +4,7 @@
 
 Git工作流和核心原理 | GitHub基本操作 | VS Code里使用Git和关联GitHub。[B 站：技术蛋老师](https://www.bilibili.com/video/BV1r3411F7kn/?vd_source=ddca02f5ce8a93f7668a9c6f429a73d1)
 
-![image-20250228111119443](img\Git_and_GitHub\image-20250228111119443.png)
+![image-20250228111119443](.img\Git_and_GitHub\image-20250228111119443.png)
 
 ## Git
 
